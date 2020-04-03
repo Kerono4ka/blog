@@ -3,7 +3,13 @@ class ArticlesController < ApplicationController
   except: [:index, :show]
 
   def index
-    @articles = Article.all 
+    if params.has_key? :search
+      @search = params[:search]
+      @articles = Article.where("title like ?", "%#{@search}%")
+    else
+      @articles = Article.all
+    end
+    
   end
 
   def show

@@ -4,6 +4,15 @@
     <%= link_to "New article", new_article_path %> 
 </p>
 
+<%= form_with(url: articles_path, method: "get", local: true) do |form| %>
+  <p>
+    <%= form.label :search %><br>
+    <%= form.text_field :search, :value => @search %>
+    <%= form.submit "search", :name => "" %>
+  </p>
+<% end %>
+
+
 <table>
   <tr>
     <th>Title</th>
