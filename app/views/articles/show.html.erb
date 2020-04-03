@@ -1,5 +1,5 @@
 <p>
-  <%= image_tag @article.image %>
+  <%= image_tag @article.image unless @article.image.nil? %>
 </p>
 
 <p>
