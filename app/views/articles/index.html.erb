@@ -12,6 +12,11 @@
   </p>
 <% end %>
 
+<p>
+  <% flash.each do |key, value| %>
+    <div> <%= key %>: <%= value %></div>
+  <% end %>
+</p>
 
 <table>
   <tr>
