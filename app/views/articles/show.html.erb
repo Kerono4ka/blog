@@ -1,6 +1,12 @@
 <p>
   <%= image_tag @article.image unless @article.image.nil? %>
 </p>
+<p>
+  <% unless @article.user.avatar.blank? %>
+    <strong>Author:</strong>
+    <%= image_tag @article.user.avatar.variant(resize_to_limit: [100, 100]) %>
+  <% end %>
+</p>
 
 <p>
   <strong>Title:</strong>
@@ -15,8 +21,14 @@
 <h2>Comments</h2>
 <%= render @article.comments %>
 
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+<% unless current_user.nil? %>
+  <%= render 'comments/form' %>
+<% else %>
+  <div>
+    <%= link_to "Log In", login_path %>
+    to leave a comment.
+  </div> <br>
+<% end %>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+
+<%= link_to 'Back', welcome_index_path %>

@@ -1,33 +1,30 @@
 class ArticlesController < ApplicationController
-  http_basic_authenticate_with name: "bla", password: "bla",
-  except: [:index, :show]
+  before_action :set_article, except: [:index, :new, :create, :show]
 
-  before_action :set_article, except: [:index, :new, :create]
+  skip_before_action :authorize, only: [:show]
 
   def index
     if params.has_key? :search
       @search = params[:search]
-      @articles = Article.where("title like ?", "%#{@search}%")
+      @articles = current_user.articles.where("title like ?", "%#{@search}%")
     else
-      @articles = Article.all
-    end
-    
+      @articles = current_user.articles
+    end   
   end
 
   def show
-    # @article = Article.find(params[:id])
+    @article = Article.find(params[:id])
   end    
 
   def new
-    @article = Article.new
+    @article = current_user.articles.build
   end
 
   def edit
-    # @article = Article.find(params[:id])
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.create(article_params)
 
     if @article.save
       redirect_to @article
@@ -37,7 +34,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    # @article = Article.find(params[:id])
     if @article.update(article_params)
       redirect_to @article
     else
@@ -49,14 +45,14 @@ class ArticlesController < ApplicationController
     if @article.destroy
       flash[:success] = "Successfully deleted!"
     else
-      flash[:error] = "Something went wrong, the acticle wan't deleted"
+      flash[:error] = "Something went wrong, the acticle wasn't deleted"
     end
     redirect_to articles_path
   end
 
   private
   def set_article
-    @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
   end
 
   def article_params

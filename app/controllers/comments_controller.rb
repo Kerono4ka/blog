@@ -1,7 +1,4 @@
 class CommentsController < ApplicationController
-  http_basic_authenticate_with name: "bla", password: "bla",
-  only: :destroy
-
   before_action :set_article, only: [:create, :destroy]
 
   def create
@@ -22,6 +19,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:commenter, :body)
+    params.require(:comment).permit(:body, :user_id)
   end
 end

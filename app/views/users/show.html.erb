@@ -1,0 +1,23 @@
+<h1>My account</h1>
+
+<%= image_tag current_user.avatar unless current_user.avatar.blank? %>
+
+<p>
+  <strong>Name:</strong>
+  <%= current_user.first_name %> <%= current_user.last_name %>
+</p>
+
+<p>
+  <strong>Login:</strong>
+  <%= current_user.login %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= current_user.email %>
+</p>
+
+<%= link_to 'Edit', users_edit_path %> | 
+<%= link_to 'Destroy', users_destroy_path,
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>

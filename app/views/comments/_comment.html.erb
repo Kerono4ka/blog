@@ -1,10 +1,13 @@
 <p>
   <p>
+    <% unless @article.user.avatar.blank? %>
+    <%= image_tag @article.user.avatar.variant(resize_to_limit: [100, 100]) %>
+  <% end %>
     <em><%= comment.created_at.to_s(:long) %></em>
   </p>
   <p>
   <strong>Commenter:</strong>
-  <%= comment.commenter %>
+  <%= current_user.login %>
   </p>
   <p>
   <strong>Comment:</strong>

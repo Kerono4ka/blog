@@ -1,0 +1,33 @@
+<h1>Editing User</h1>
+
+<%= form_with(model: current_user, url: users_update_path, method: 'post', local: true) do |form| %>
+    <%= render 'errors', user: current_user%>
+  <div>
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar  %>
+  </div>
+
+  <div>
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name  %>
+  </div>
+
+  <div>
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= form.label :login %>
+    <%= form.text_field :login %>
+  </div>
+
+  <div>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.submit 'Save' %>
+  </div>
+<% end %>
