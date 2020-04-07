@@ -1,7 +1,8 @@
 <h2>Add a comment:</h2>
 
-<%= form_with(model: [ @article, @article.comments.build(user_id: @article.user_id) ],
+<%= form_with(model: [ @commentable, @commentable.comments.build(user_id: current_user.id) ],
 local: true) do |form| %>
+  <%= hidden_field_tag "article_id", @article.id %>
   <%= form.hidden_field :user_id %>
   <p>
     <%= form.label :body %><br>

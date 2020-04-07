@@ -1,24 +1,43 @@
-<p>
+<%= content_tag :div, style: "margin-left: #{level * 50}px" do -%>
   <p>
-    <% unless @article.user.avatar.blank? %>
-    <%= image_tag @article.user.avatar.variant(resize_to_limit: [100, 100]) %>
-  <% end %>
-    <em><%= comment.created_at.to_s(:long) %></em>
-  </p>
-  <p>
-  <strong>Commenter:</strong>
-  <%= comment.user.login %>
-  </p>
-  <p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-  </p>
-</p>
+    <p>
+      <% unless @article.user.avatar.blank? %>
+      <%= image_tag @article.user.avatar.variant(resize_to_limit: [100, 100]) %>
+    <% end %>
+      <em><%= comment.created_at.to_s(:long) %></em>
+    </p>
 
-<p>
- <% if comment.user == current_user %>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
+    <p>
+    <strong>Commenter:</strong>
+    <%= comment.user.login %>
+    </p>
+    <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+    </p>
+
+
+    <% unless current_user.nil? %>
+      <%= link_to "Add reply", new_comment_path(:comment_id => comment.id, :article_id => @article.id)  %>
+    <% end %>
+
+  </p>
+
+  <p>
+  <% if comment.user == current_user %>
+    <%= link_to 'Destroy Comment', [comment.commentable, comment],
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </p>
+
+  <% unless comment.comments.blank? %>
+    <%= render comment.comments, :level => level + 1 %>
   <% end %>
-</p>
+
+<% end -%>
+
+
+
+
+
