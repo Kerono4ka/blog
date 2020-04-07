@@ -7,7 +7,7 @@
   </p>
   <p>
   <strong>Commenter:</strong>
-  <%= current_user.login %>
+  <%= comment.user.login %>
   </p>
   <p>
   <strong>Comment:</strong>
@@ -16,7 +16,9 @@
 </p>
 
 <p>
+ <% if comment.user == current_user %>
   <%= link_to 'Destroy Comment', [comment.article, comment],
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </p>
