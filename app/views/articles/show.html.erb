@@ -25,7 +25,7 @@
   <%= link_to "Leave a comment on the article", new_comment_path(:article_id => @article.id) %>
 <% else %>
   <div>
-    <%= link_to "Log In", login_path %>
+    <%= link_to "Log In", login_path(:before_login_path => request.path) %>
     to leave a comment.
   </div> <br>
 <% end %>

@@ -2,7 +2,9 @@
 
 <h1>Login</h1>
 
-<%= form_with(url: sessions_path) do %>
+
+<%= form_with(url: sessions_path) do |form| %>
+  
   <div>
     <%= label_tag :email %><br />
     <%= text_field_tag :email, params[:email] %>
@@ -11,5 +13,7 @@
     <%= label_tag :password %><br />
     <%= password_field_tag :password %>
   </div>
+
+  <%= hidden_field_tag "return_url", params[:before_login_path] %>
   <div><%= submit_tag "Log In" %></div>
 <% end %>
