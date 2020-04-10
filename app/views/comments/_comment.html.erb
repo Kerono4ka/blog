@@ -9,7 +9,7 @@
     <div class="comment-content col-md-11 col-sm-10">
       <h6 class="small comment-meta">
         <%= comment.user.login %>
-        ____ <em><%= comment.created_at.to_s(:long) %></em>
+        ____ <em><%= comment.created_at.localtime.to_s(:long) %></em>
       </h6>
       <div class="comment-body">
         <%= comment.body %>
