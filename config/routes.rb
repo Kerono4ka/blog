@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get 'users/edit'
   post 'users/update'
   delete 'users/destroy'  
-  resources :users, only: [:new, :create]
-  resources :sessions, only: [:new, :create]
+  resources :users, only: [:create]
+  resources :sessions, only: [:create]
 
   resources :articles do 
     resources :comments
