@@ -10,16 +10,21 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.create(comment_params)
 
     if @comment.save
+      flash[:success] = "Your comment was successfully created!"
       redirect_to article_path(@article)
-    else  
+    else
+      flash[:alert] = "Comment wasn't created!"
       render 'new'      
     end  
   end
 
   def destroy
     @comment = @commentable.comments.find(params[:id])
-    @comment.destroy
-
+    if @comment.destroy
+      flash[:success] = "Comment was successfully deleted!"
+    else
+      flash[:error] = "Something went wrong, the comment wasn't deleted"
+    end
     redirect_to article_path(@article)
   end
 

@@ -13,10 +13,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     if @user.save
+      flash[:success] = "Sign up!"
       redirect_to login_path
     else  
+      flash[:error] = "Invalid data found when processing input!"
       render 'new'      
     end
   end
@@ -27,8 +28,10 @@ class UsersController < ApplicationController
     params_to_update.delete(:password) if params_to_update[:password].blank?
 
     if @user.update_attributes(params_to_update)
+      flash[:success] = "Your account was successfully updated!"
       redirect_to users_show_path
     else
+      flash[:alert] = "Your account wasn't updated!"
       render 'edit'
     end
   end
@@ -37,10 +40,10 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.destroy
       drop_session
-      flash[:success] = "Successfully deleted!"
+      flash[:success] = "User was successfully deleted!"
       redirect_to login_path
     else
-      flash[:error] = "Something went wrong, the user wasn't deleted"
+      flash[:error] = "Something went wrong, the user wasn't deleted!"
       redirect_to users_show_path
     end
   end

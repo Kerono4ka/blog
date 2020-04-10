@@ -27,23 +27,27 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.create(article_params)
 
     if @article.save
+      flash[:success] = "Article was successfully created!"
       redirect_to @article
     else  
+      flash[:alert] = "Acticle wasn't created!"
       render 'new'      
     end
   end
 
   def update
     if @article.update(article_params)
+      flash[:success] = "Article was successfully updated!"
       redirect_to @article
     else
+      flash[:alert] = "Acticle wasn't updated!"
       render 'edit'
     end
   end
 
   def destroy
     if @article.destroy
-      flash[:success] = "Successfully deleted!"
+      flash[:success] = "Article was successfully deleted!"
     else
       flash[:error] = "Something went wrong, the acticle wasn't deleted"
     end
