@@ -11,19 +11,37 @@
 
   <body>
 
-    <nav>
-      <%= link_to 'Blog', controller: 'welcome' %> |
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand">
+      <%= link_to 'Blog', controller: 'welcome' %> 
+      </div> | 
+
       <% if current_user %>
-        Logged in as <%= current_user.login %> | 
-        <%= link_to 'My Blog', controller: 'articles'%> | 
-        <%= link_to 'Manage Profile', users_show_path %> | 
-        <%= link_to 'Log Out', logout_path %>
+        <div class="nav-link disabled">
+          Logged in as <span id="user-name"><%= current_user.login %> </span>
+        </div> | 
+        <div class="nav-link">
+          <%= link_to 'My Blog', controller: 'articles'%>
+        </div> | 
+        <div class="nav-link">
+          <%= link_to 'Manage Profile', users_show_path %>
+        </div> | 
+        <div class="nav-link"> 
+          <%= link_to 'Log Out', logout_path %>
+        </div>
+
       <% else %>
-        <%= link_to 'Sign Up', signup_path %> | 
-        <%= link_to 'Log In', login_path %>
+        <div class="nav-link">
+          <%= link_to 'Sign Up', signup_path %>
+        </div> | 
+        <div class="nav-link">
+          <%= link_to 'Log In', login_path %>
+        </div>
       <% end %>
     </nav>
 
-    <%= yield %>
+    <div id="margins">
+      <%= yield %>
+    </div>
   </body>
 </html>

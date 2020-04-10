@@ -1,0 +1,85 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ */
+
+ /* Custom bootstrap variables must be set or imported *before* bootstrap. */
+ @import "bootstrap";
+
+ .navbar {
+   color: #004d4d;
+   background-color: #f2f2f2 !important;
+ }
+
+.nav-link {
+  color: #004080 !important;
+}
+
+#user-name {
+  color: #0a0a4d;
+}
+
+.h1 { 
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; 
+  font-size: 24px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 26.4px; 
+} 
+
+.h3 { 
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; 
+  font-size: 14px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 15.4px; 
+} 
+
+.p { 
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; 
+  font-size: 14px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 20px; 
+} 
+
+.blockquote { 
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; 
+  font-size: 21px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 30px; 
+} 
+
+.div { 
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; 
+  font-size: 13px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 18.5714px; 
+}
+
+#margins {
+  margin-left: 20px; 
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+ }
+
+p {
+  margin-top: 10px;
+  margin-bottom: 5px;
+ }

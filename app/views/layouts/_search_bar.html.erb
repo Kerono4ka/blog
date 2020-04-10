@@ -1,7 +1,9 @@
-<%= form_with(url: our_path, method: "get", local: true) do |form| %>
-  <p>
-    <%= form.label :search %><br>
-    <%= form.text_field :search, :value => @search %>
-    <%= form.submit "search", :name => "" %>
-  </p>
-<% end %>
+<form class="form-inline">
+  <%= form_with(url: our_path, method: "get", local: true) do |form| %>
+    <div class="form-group p-3" > 
+      <%= form.text_field :search, :value => @search, placeholder: "Search", class: "form-control"%>
+    </div>
+    <button class="btn btn-info" type="search">Search</button>
+   
+  <% end %>
+</form>

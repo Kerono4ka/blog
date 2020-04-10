@@ -3,11 +3,17 @@ class CommentsController < ApplicationController
   before_action :find_commentable
 
   def new
+    @comment = @commentable.comments.build(user_id: current_user.id)
   end
 
   def create
     @comment = @commentable.comments.create(comment_params)
-    redirect_to article_path(@article)
+
+    if @comment.save
+      redirect_to article_path(@article)
+    else  
+      render 'new'      
+    end  
   end
 
   def destroy

@@ -1,35 +1,35 @@
 <%= content_tag :div, style: "margin-left: #{level * 50}px" do -%>
-  <p>
-    <p>
+  <div class="comment mb-2 row">
+
+    <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
       <% unless comment.user.avatar.blank? %>
-      <%= image_tag comment.user.avatar.variant(resize_to_limit: [100, 100]) %>
+      <%= image_tag comment.user.avatar.variant(resize_to_limit: [100, 100]), class: "mx-auto rounded-circle img-fluid" %>
     <% end %>
-      <em><%= comment.created_at.to_s(:long) %></em>
-    </p>
+    </div>
+    <div class="comment-content col-md-11 col-sm-10">
+      <h6 class="small comment-meta">
+        <%= comment.user.login %>
+        ____ <em><%= comment.created_at.to_s(:long) %></em>
+      </h6>
+      <div class="comment-body">
+        <%= comment.body %>
+      </div>
+      
+      <% unless current_user.nil? %>
+        <%= link_to "Add reply", new_comment_path(:comment_id => comment.id, :article_id => @article.id), class: "text-right small" %>
+      <% end %>
 
-    <p>
-    <strong>Commenter:</strong>
-    <%= comment.user.login %>
-    </p>
-    <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-    </p>
+      <% if comment.user == current_user %>
+        <%= link_to 'Destroy Comment', [comment.commentable, comment, {:article_id => @article.id}],
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' }, class: "text-right small"  %>
+      <% end %>
+
+    </div>
 
 
-    <% unless current_user.nil? %>
-      <%= link_to "Add reply", new_comment_path(:comment_id => comment.id, :article_id => @article.id)  %>
-    <% end %>
-
-  </p>
-
-  <p>
-  <% if comment.user == current_user %>
-    <%= link_to 'Destroy Comment', [comment.commentable, comment],
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-    <% end %>
-  </p>
+  </div>
+  
 
   <% unless comment.comments.blank? %>
     <%= render comment.comments, :level => level + 1 %>

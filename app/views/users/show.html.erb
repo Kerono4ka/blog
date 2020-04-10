@@ -1,23 +1,31 @@
-<h1>My account</h1>
+<div class="container h-100">
+  <div class="col-md-5 mx-auto">
+    <div class="border border-secondary rounded p-5">
+      <h1>My account</h1>
 
-<%= image_tag current_user.avatar unless current_user.avatar.blank? %>
+      <% unless current_user.avatar.blank? %>
+        <%= image_tag current_user.avatar.variant(resize_to_limit: [330, 330]) %>
+      <% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= current_user.first_name %> <%= current_user.last_name %>
-</p>
+      <p>
+        <strong>Name:</strong>
+        <%= current_user.first_name %> <%= current_user.last_name %>
+      </p>
 
-<p>
-  <strong>Login:</strong>
-  <%= current_user.login %>
-</p>
+      <p>
+        <strong>Login:</strong>
+        <%= current_user.login %>
+      </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= current_user.email %>
-</p>
+      <p>
+        <strong>Email:</strong>
+        <%= current_user.email %>
+      </p>
 
-<%= link_to 'Edit', users_edit_path %> | 
-<%= link_to 'Destroy', users_destroy_path,
-            method: :delete,
-            data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Edit', users_edit_path %> | 
+      <%= link_to 'Destroy', users_destroy_path,
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+</div>

@@ -2,20 +2,22 @@
 
 <%= render 'layouts/search_bar', our_path: welcome_index_path %>
 
-<table>
+<table class="table table-striped table-light table-bordered">
+  <thead class="thead-light">
   <tr>
-    <th>Time</th>
-    <th>Title</th>
-    <th>Text</th>
-    <th></th>
+    <th scope="col">Time</th>
+    <th scope="col">Title</th>
+    <th scope="col">Text</th>
+    <th scope="col"></th>
   </tr>
+  </thead>
  
   <% @articles.each do |article| %>
     <tr>
-      <td><%= article.created_at.to_s(:short) %></td>
-      <td>|<%= article.title %></td>
-      <td>|<%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
+      <td scope="row"><%= article.created_at.to_s(:short) %></td>
+      <td scope="row"><%= article.title %></td>
+      <td scope="row"><%= article.text %></td>
+      <td scope="row"><%= link_to 'Show', article_path(article), class: "btn btn-info btn-sm" %></td>
     </tr>
   <% end %>
 </table>
