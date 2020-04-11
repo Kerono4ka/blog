@@ -11,7 +11,9 @@
     <th scope="col"></th>
   </tr>
   </thead>
- 
+
+  <div class="p-3"><%= will_paginate @articles, renderer: @custom_paginate_renderer %></div>
+
   <% @articles.each do |article| %>
     <tr>
       <td scope="row"><%= article.created_at.localtime.to_s(:short) %></td>
@@ -21,3 +23,5 @@
     </tr>
   <% end %>
 </table>
+
+ <%= page_entries_info @articles %>

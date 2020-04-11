@@ -22,6 +22,8 @@
   </tr>
   </thead>
  
+  <div class="p-3"><%= will_paginate @articles, renderer: @custom_paginate_renderer %></div>
+
   <% @articles.each do |article| %>
     <tr>
       <td scope="row"><%= article.created_at.localtime.to_s(:short) %></td>
@@ -38,6 +40,7 @@
   <% end %>
 </table>
 
+<%= page_entries_info @articles %>
 <p>
     <%= link_to "Main page", controller: 'welcome'%>
 </p>

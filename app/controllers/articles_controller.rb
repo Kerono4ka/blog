@@ -8,7 +8,8 @@ class ArticlesController < ApplicationController
       @search = params[:search]
       @articles = current_user.articles.where("title like ?", "%#{@search}%")
     else
-      @articles = current_user.articles
+      @articles = current_user.articles.order('created_at DESC').page(params[:page])
+      @custom_paginate_renderer = custom_paginate_renderer
     end   
   end
 
