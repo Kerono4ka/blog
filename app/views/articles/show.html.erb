@@ -44,7 +44,8 @@
     <div class="row">
         <div class="comments col-md-9" id="comments">
             <h3 class="mb-4 font-weight-light">Comments</h3>
-            <%= render @article.comments, :level => 0 %>
+            <div class="p-3"><%= will_paginate @comments, renderer: @custom_paginate_renderer %></div>
+            <%= render @comments, :level => 0 %>
         </div>
     </div>
 </div>

@@ -15,7 +15,7 @@
         <%= comment.body %>
       </div>
       
-      <% unless current_user.nil? %>
+      <% unless(current_user.nil?  || level == 4) %>
         <%= link_to "Add reply", new_comment_path(:comment_id => comment.id, :article_id => @article.id), class: "text-right small" %>
       <% end %>
 

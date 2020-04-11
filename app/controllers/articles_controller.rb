@@ -8,13 +8,17 @@ class ArticlesController < ApplicationController
       @search = params[:search]
       @articles = current_user.articles.where("title like ?", "%#{@search}%")
     else
-      @articles = current_user.articles.order('created_at DESC').page(params[:page])
-      @custom_paginate_renderer = custom_paginate_renderer
-    end   
+      @articles = current_user.articles  
+    end
+
+    @articles = @articles.order('created_at DESC').page(params[:page])   
+    @custom_paginate_renderer = custom_paginate_renderer
   end
 
   def show
     @article = Article.find(params[:id])
+    @comments = @article.comments.paginate(:page => params[:page])
+    @custom_paginate_renderer = custom_paginate_renderer
   end    
 
   def new
