@@ -6,5 +6,9 @@ class Comment < ApplicationRecord
   validates :body, presence: true,
                    length: { minimum: 5 }
 
-  self.per_page = 3
+  self.per_page = 10
+
+  def article_commentable_type?
+    false
+  end
 end

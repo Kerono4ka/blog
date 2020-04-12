@@ -1,0 +1,19 @@
+<div class="border border-info rounded p-3 m-2 ml-5">
+
+  <h5>Add a comment:</h5>
+  <%= form_with(model: [@commentable, @comment], class: "#{@reply_type}") do |form| %>
+
+    <%= render 'layouts/errors', model: @comment , model_str: 'comment' %>
+    
+    <%= hidden_field_tag "article_id", @article.id %>
+    <%= form.hidden_field :user_id %>
+
+    <div class="form-group">
+      <%= form.text_area :body, class: "form-control", placeholder: "Write something..." %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit 'Add the comment', class: "btn btn-info btn-sm"%>
+    </div>
+  <% end %>
+</div>

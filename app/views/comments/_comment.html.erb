@@ -1,41 +1,59 @@
-<%= content_tag :div, style: "margin-left: #{level * 50}px" do -%>
+<div class="ml-5 pl-2">
   <div class="comment mb-2 row">
 
+    <!-- Author's avatar picture  --> 
     <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
       <% unless comment.user.avatar.blank? %>
       <%= image_tag comment.user.avatar.variant(resize_to_limit: [100, 100]), class: "mx-auto rounded-circle img-fluid" %>
     <% end %>
     </div>
+
+    <!-- Author's login and time --> 
     <div class="comment-content col-md-11 col-sm-10">
       <h6 class="small comment-meta">
         <%= comment.user.login %>
         ____ <em><%= comment.created_at.localtime.to_s(:long) %></em>
       </h6>
+
+      <!-- Author's comment body --> 
       <div class="comment-body">
         <%= comment.body %>
       </div>
       
-      <% unless(current_user.nil?  || level == 4) %>
-        <%= link_to "Add reply", new_comment_path(:comment_id => comment.id, :article_id => @article.id), class: "text-right small" %>
+      <!-- Add reply button --> 
+      <% unless(current_user.nil?) %>
+        <%= link_to "Add reply", new_comment_path(:comment_id => comment.id, :article_id => @article.id), 
+            remote: true, class: "text-right small reply" %>
       <% end %>
 
+      <!-- Delete button --> 
       <% if comment.user == current_user %>
-        <%= link_to 'Destroy Comment', [comment.commentable, comment, {:article_id => @article.id}],
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' }, class: "text-right small"  %>
+
+        <% if comment.commentable.article_commentable_type? %>
+          <%= link_to 'Destroy Comment', [comment.commentable, comment],
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' }, class: "text-right small"  %>
+        <% else %>
+          <%= link_to 'Destroy Comment', [comment.commentable, comment, {:article_id => @article.id} ],
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' }, class: "text-right small"  %>
+        <% end %>
+
       <% end %>
 
     </div>
 
-
+    <div class="nested-comment-reply"></div>
   </div>
   
+  <!-- Recursively invoke nested comments --> 
+  <div class="nested-comments">
+    <% unless comment.comments.blank? %>
+      <%= render comment.comments %>
+    <% end %>
+  </div>
 
-  <% unless comment.comments.blank? %>
-    <%= render comment.comments, :level => level + 1 %>
-  <% end %>
-
-<% end -%>
+</div>
 
 
 

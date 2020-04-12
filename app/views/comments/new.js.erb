@@ -1,0 +1,38 @@
+function showFlashes() {
+  $(".flashes").empty()
+           .append("<%= j render 'layouts/flash' %>");;
+}
+
+$(".reply, .comment-reply")
+  .on("ajax:success", function() {
+
+    showFlashes();
+
+    if ($(this).hasClass('.comment-reply')) {
+      $(this).remove();
+    } else {
+      $(this).hide();
+    }
+
+    $(this).closest(".comment").find(".nested-comment-reply")
+           .empty()
+           .append("<%= j render 'new' %>");
+  });
+
+
+$(".article-link-reply, .article-reply")
+  .on("ajax:success", function() {
+
+    showFlashes();
+
+    if ($(this).hasClass('.article-reply')) {
+      $(this).remove();
+    } else {
+      $(this).hide();
+    }
+
+    $(this).closest(".article").find(".article-comment")
+           .empty()
+           .append("<%= j render 'new' %>");
+
+  });

@@ -9,7 +9,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="body">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="navbar-brand">
@@ -41,11 +41,7 @@
     </nav>
 
     <div id="margins">
-      <% flash.each do |key, value| %>
-        <div class="<%= flash_class(key) %>">
-              <%= value %>
-        </div>
-      <% end %>
+      <div class="flashes"><%= render "layouts/flash" %></div>
 
       <%= yield %>
     </div>
