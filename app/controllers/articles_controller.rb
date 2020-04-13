@@ -4,11 +4,11 @@ class ArticlesController < ApplicationController
   skip_before_action :authorize, only: [:show]
 
   def index
+    @articles = current_user.articles.includes(:user)
+
     if params.has_key? :search
       @search = params[:search]
-      @articles = current_user.articles.where("title like ?", "%#{@search}%")
-    else
-      @articles = current_user.articles  
+      @articles = @articles.where("title like ?", "%#{@search}%")
     end
 
     @articles = @articles.order('created_at DESC').page(params[:page])   
@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
   def create
     @article = current_user.articles.create(article_params)
 
-    if @article.save
+    if @article.valid?
       flash[:success] = "Article was successfully created!"
       redirect_to @article
     else  

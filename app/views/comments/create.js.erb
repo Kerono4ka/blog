@@ -1,8 +1,4 @@
-function showFlashes() {
-  $(".flashes").empty()
-           .append("<%= j render 'layouts/flash' %>");;
-}
-
+<%= render partial: 'layouts/show_flash', formats: [:js]%>
 
 $(".comment-reply")
   .on("ajax:success", function() {

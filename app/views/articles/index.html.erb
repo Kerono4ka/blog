@@ -16,6 +16,7 @@
 <thead class="thead-light">
   <tr>
     <th scope="col">Time</th>
+    <th scope="col">Author</th>
     <th scope="col">Title</th>
     <th scope="col">Text</th>
     <th scope="col"></th>
@@ -27,6 +28,7 @@
   <% @articles.each do |article| %>
     <tr>
       <td scope="row"><%= article.created_at.localtime.to_s(:short) %></td>
+      <td scope="row"><%= article.user.login %></td>
       <td scope="row"><%= article.title %></td>
       <td scope="row"><%= article.text %></td>
       <td scope="row">

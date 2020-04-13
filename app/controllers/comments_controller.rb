@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.create(comment_params)
 
-    if @comment.save
+    if @comment.valid?
       flash.now[:success] = "Your comment was successfully created!"
       respond_to do |format|
       # format.html { redirect_to article_path(@article) }
