@@ -1,4 +1,4 @@
-<div class="ml-5 pl-2">
+<div class="ml-5 pl-2 comment-block">
   <div class="comment mb-2 row">
 
     <!-- Author's avatar picture  --> 
@@ -30,13 +30,15 @@
       <% if comment.user == current_user %>
 
         <% if comment.commentable.article_commentable_type? %>
-          <%= link_to 'Destroy Comment', [comment.commentable, comment],
+          <%= link_to 'Destroy Comment', [comment.commentable, comment, {:page => @comment_page}],
                       method: :delete,
-                      data: { confirm: 'Are you sure?' }, class: "text-right small"  %>
+                      data: { confirm: 'Are you sure?', remote: true },  
+                      class: "text-right small delete"  %>
         <% else %>
           <%= link_to 'Destroy Comment', [comment.commentable, comment, {:article_id => @article.id} ],
                       method: :delete,
-                      data: { confirm: 'Are you sure?' }, class: "text-right small"  %>
+                      data: { confirm: 'Are you sure?', remote: true }, 
+                      class: "text-right small delete"  %>
         <% end %>
 
       <% end %>
@@ -49,7 +51,7 @@
   <!-- Recursively invoke nested comments --> 
   <div class="nested-comments">
     <% unless comment.comments.blank? %>
-      <%= render comment.comments %>
+      <%= render comment.comments.order(created_at: :desc) %>
     <% end %>
   </div>
 

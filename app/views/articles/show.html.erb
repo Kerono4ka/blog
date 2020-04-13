@@ -46,10 +46,16 @@
 
 <div class="container py-2">
     <div class="row">
-        <div class="comments col-md-9" id="comments">
+        <div class="comments col-md-9">
             <h3 class="mb-4 font-weight-light">Comments</h3>
-            <div class="p-3"><%= will_paginate @comments, renderer: @custom_paginate_renderer %></div>
-            <%= render @comments %>
+
+            <div id="comments-reload">
+              <div class="p-3"><%= will_paginate @comments, renderer: @custom_paginate_renderer %></div>
+                <div id="comments">
+                  <%= render @comments %>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

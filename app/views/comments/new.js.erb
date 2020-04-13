@@ -4,7 +4,7 @@ $(".reply, .comment-reply")
   .on("ajax:success", function() {
 
     showFlashes();
-
+    
     if ($(this).hasClass('.comment-reply')) {
       $(this).remove();
     } else {

@@ -28,14 +28,22 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-   
     @comment = @commentable.comments.find(params[:id])
+    if @commentable.article_commentable_type?
+      @comment_page = params[:page]
+      @comments = @article.comments.order(created_at: :desc).paginate(:page => @comment_page)
+      @custom_paginate_renderer = custom_paginate_renderer
+    end
+
     if @comment.destroy
       flash[:success] = "Comment was successfully deleted!"
     else
       flash[:error] = "Something went wrong, the comment wasn't deleted"
     end
-    redirect_to article_path(@article)
+    respond_to do |format|
+      format.js
+      # format.html { redirect_to article_path(@article) }
+    end
   end
 
 

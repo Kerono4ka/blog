@@ -1,0 +1,13 @@
+<% if @commentable.article_commentable_type? %>
+  $(".delete").on("ajax:success", function() {
+    $("#comments-reload")
+      .html(`<div class="p-3"><%= will_paginate @comments, renderer: @custom_paginate_renderer %></div>
+              <div id="comments">
+                <%= render @comments %>
+              </div>`);
+  });
+<% else %>
+  $(".delete").on("ajax:success", function() {
+      $(this).closest(".comment-block").remove();
+    });
+<% end %>

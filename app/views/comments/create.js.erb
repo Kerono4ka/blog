@@ -9,7 +9,7 @@ $(".comment-reply")
     
     commentEl.parent()
              .children(".nested-comments")
-             .append("<%= j render @comment %>");
+             .prepend("<%= j render @comment %>");
 
     commentEl.find(".reply").show();
 
@@ -23,6 +23,11 @@ $(".article-reply")
 
     showFlashes();
 
+    if ($("#comments").children(".comment-block").length === 5) {
+      $("#comments").children(".comment-block")
+                    .last().remote();
+    }
+
     commentEl = $(this).closest(".article");
 
     commentEl.find(".article-link-reply").show();
@@ -30,5 +35,5 @@ $(".article-reply")
     commentEl.find(".article-comment").empty()
 
     commentEl.find("#comments")
-             .append("<%= j render @comment %>");  
+             .prepend("<%= j render @comment %>");  
   });
