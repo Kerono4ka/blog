@@ -59,3 +59,5 @@ gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 
 gem 'will_paginate', '~> 3.3.0'
+
+gem 'mailgun-ruby', '~>1.1.6'
