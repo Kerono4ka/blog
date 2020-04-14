@@ -8,6 +8,9 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+
+      UserMailer.with(user: user).sample_email.deliver_now
+      
       redirect_to params[:return_url], notice: "Logged in!"
     else
       flash[:error] = "Email or password is invalid!"
