@@ -50,7 +50,7 @@
             <h3 class="mb-4 font-weight-light">Comments</h3>
 
             <div id="comments-reload">
-              <div class="p-3"><%= will_paginate @comments, renderer: @custom_paginate_renderer %></div>
+              <div class="p-3"><%= will_paginate @comments, renderer: custom_paginate_renderer %></div>
                 <div id="comments">
                   <%= render @comments %>
                 </div>

@@ -32,7 +32,6 @@ class CommentsController < ApplicationController
     if @commentable.article_commentable_type?
       @comment_page = params[:page]
       @comments = @article.comments.order(created_at: :desc).paginate(:page => @comment_page)
-      @custom_paginate_renderer = custom_paginate_renderer
     end
 
     if @comment.destroy

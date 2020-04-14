@@ -23,7 +23,7 @@
   </tr>
   </thead>
  
-  <div class="p-3"><%= will_paginate @articles, renderer: @custom_paginate_renderer %></div>
+  <div class="p-3"><%= will_paginate @articles, renderer: custom_paginate_renderer %></div>
 
   <% @articles.each do |article| %>
     <tr>

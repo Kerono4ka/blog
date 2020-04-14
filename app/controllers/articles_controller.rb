@@ -12,14 +12,12 @@ class ArticlesController < ApplicationController
     end
 
     @articles = @articles.order(created_at: :desc).page(params[:page])   
-    @custom_paginate_renderer = custom_paginate_renderer
   end
 
   def show
     @article = Article.find(params[:id])
     @comment_page = params[:page]
     @comments = @article.comments.order(created_at: :desc).paginate(:page => @comment_page)
-    @custom_paginate_renderer = custom_paginate_renderer
   end    
 
   def new
