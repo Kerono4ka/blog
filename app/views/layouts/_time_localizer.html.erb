@@ -1,0 +1,5 @@
+<script>
+  $("td[data-created], em[data-created]").each(function() {
+    $(this).html(new Date($(this).attr("data-created")).toLocaleString("ru"));
+  });
+</script>

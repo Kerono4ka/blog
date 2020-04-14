@@ -12,7 +12,8 @@
     <div class="comment-content col-md-11 col-sm-10">
       <h6 class="small comment-meta">
         <%= comment.user.login %>
-        ____ <em><%= comment.created_at.localtime.to_s(:long) %></em>
+        ____ <em data-created="<%= comment.created_at %>"></em>
+        <%= render 'layouts/time_localizer' %>
       </h6>
 
       <!-- Author's comment body --> 

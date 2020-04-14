@@ -1,4 +1,4 @@
-<%= render partial: 'layouts/show_flash', formats: [:js]%>
+<%= render partial: 'layouts/show_flash', formats: [:js] %>
 
 $(".comment-reply")
   .on("ajax:success", function() {
@@ -25,14 +25,14 @@ $(".article-reply")
 
     if ($("#comments").children(".comment-block").length === 5) {
       $("#comments").children(".comment-block")
-                    .last().remote();
+                    .last().remove();
     }
 
     commentEl = $(this).closest(".article");
 
     commentEl.find(".article-link-reply").show();
 
-    commentEl.find(".article-comment").empty()
+    commentEl.find(".article-comment").empty();
 
     commentEl.find("#comments")
              .prepend("<%= j render @comment %>");  
